@@ -1,0 +1,267 @@
+<html>
+ <head>
+  <title>
+   Secret Code Transaction
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <script>
+   function checkCode() {
+            const code = document.getElementById('secretCode').value;
+            const nameListSection = document.getElementById('nameListSection');
+            const codeSection = document.getElementById('codeSection');
+            if (code === 'joybangla') {
+                codeSection.classList.add('hidden');
+                nameListSection.classList.remove('hidden');
+            } else {
+                alert('Incorrect code. Please try again.');
+            }
+        }
+
+        function startTransaction(name) {
+            const transactionSection = document.getElementById('transactionSection');
+            const nameListSection = document.getElementById('nameListSection');
+            const transferMessage = document.getElementById('transferMessage');
+            const bankStatement = document.getElementById('bankStatement');
+            const amountElement = document.getElementById('amount');
+            const percentageElement = document.getElementById('percentage');
+            const statementName = document.getElementById('statementName');
+            const statementAmount = document.getElementById('statementAmount');
+            const statementTo = document.getElementById('statementTo');
+            const accountHolderName = document.getElementById('accountHolderName');
+
+            nameListSection.classList.add('hidden');
+            transactionSection.classList.remove('hidden');
+            transferMessage.classList.remove('hidden');
+            bankStatement.classList.add('hidden');
+
+            let percentage = 0;
+            let amount = 0;
+            const maxAmount = name === 'Asif Adnan' ? 160 : Math.floor(Math.random() * 160);
+            statementName.innerText = name;
+            statementAmount.innerText = `$${maxAmount}k`;
+            statementTo.innerText = `${name}'s bank`;
+            accountHolderName.innerText = name;
+
+            const interval = setInterval(() => {
+                if (percentage < 100) {
+                    percentage++;
+                    amount += maxAmount / 100;
+                    percentageElement.innerText = `${percentage}% complete`;
+                    amountElement.innerText = `$${amount.toFixed(1)}k`;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        transferMessage.classList.add('hidden');
+                        bankStatement.classList.remove('hidden');
+                    }, 1000);
+                }
+            }, 40);
+        }
+
+        function goBack() {
+            const nameListSection = document.getElementById('nameListSection');
+            const transactionSection = document.getElementById('transactionSection');
+            const bankStatement = document.getElementById('bankStatement');
+
+            bankStatement.classList.add('hidden');
+            transactionSection.classList.add('hidden');
+            nameListSection.classList.remove('hidden');
+        }
+  </script>
+ </head>
+ <body class="bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center min-h-screen">
+  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+   <div class="animate__animated animate__fadeIn" id="codeSection">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+     Enter RAW Secret Code
+    </h1>
+    <input class="border p-3 w-full mb-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" id="secretCode" placeholder="Enter code here" type="password"/>
+    <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="checkCode()">
+     Submit
+    </button>
+    <div class="mt-4 text-center">
+     <p class="text-lg font-bold text-gray-800 animate-pulse">
+     </p>
+    </div>
+   </div>
+   <div class="hidden animate__animated animate__fadeIn" id="nameListSection">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+     Select a Person
+    </h1>
+    <ul class="space-y-4">
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Asif Adnan')">
+       Asif Adnan
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Abu Tuha Adnan')">
+       Abu Tuha Adnan
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Ahmed Rafiq')">
+       Ahmed Rafiq
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Shamshul Arefin Sakhti')">
+       Shamshul Arefin Sakhti
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Tanvir')">
+       Tanvir
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Mehedi Hasan')">
+       Mehedi Hasan
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Shimanto')">
+       Shimanto
+      </button>
+     </li>
+     <li>
+      <button class="bg-blue-500 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-600 transition duration-300" onclick="startTransaction('Jakaria Masud')">
+       Jakaria Masud
+      </button>
+     </li>
+    </ul>
+   </div>
+   <div class="hidden animate__animated animate__fadeIn" id="transactionSection">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+     Transaction in Progress
+    </h1>
+    <div class="hidden text-center" id="transferMessage">
+     <p class="text-lg mb-4 text-gray-700">
+      Transferring funds, please wait...
+     </p>
+     <div class="flex justify-center items-center mb-4">
+      <div class="w-16 h-16 border-t-4 border-blue-500 rounded-full animate-spin">
+      </div>
+     </div>
+     <div class="bg-gray-200 p-4 rounded-lg shadow-md">
+      <div class="flex justify-between mb-2">
+       <span>
+        Amount
+       </span>
+       <span id="amount">
+        $0.0k
+       </span>
+      </div>
+      <div class="flex justify-between">
+       <span>
+        Progress
+       </span>
+       <span id="percentage">
+        0% complete
+       </span>
+      </div>
+     </div>
+    </div>
+    <div class="hidden animate__animated animate__fadeIn" id="bankStatement">
+     <h2 class="text-2xl font-bold mb-4 text-center text-gray-800">
+      Bank Statement of
+      <span id="statementName">
+      </span>
+     </h2>
+     <div class="bg-gray-200 p-6 rounded-lg shadow-md">
+      <div class="flex justify-between mb-2">
+       <span class="font-semibold">
+        Transaction ID:
+       </span>
+       <span>
+        #123456789
+       </span>
+      </div>
+      <div class="flex justify-between mb-2">
+       <span class="font-semibold">
+        Date:
+       </span>
+       <span>
+        2023-10-01
+       </span>
+      </div>
+      <div class="flex justify-between mb-2">
+       <span class="font-semibold">
+        Amount:
+       </span>
+       <span id="statementAmount">
+        $0k
+       </span>
+      </div>
+      <div class="flex justify-between mb-2">
+       <span class="font-semibold">
+        From:
+       </span>
+       <span>
+        RAW
+       </span>
+      </div>
+      <div class="flex justify-between mb-2">
+       <span class="font-semibold">
+        To:
+       </span>
+       <span id="statementTo">
+       </span>
+      </div>
+      <div class="flex justify-between mb-2">
+       <span class="font-semibold">
+        Status:
+       </span>
+       <span>
+        Completed
+       </span>
+      </div>
+      <div class="mt-4">
+       <h3 class="text-lg font-bold">
+        Bank Details
+       </h3>
+       <p>
+        Bank Name: Maybank
+       </p>
+       <p>
+        Account Number: 1234-5678-9012
+       </p>
+       <p>
+        Branch: Kuala Lumpur
+       </p>
+       <p>
+        SWIFT Code: MBBEMYKL
+       </p>
+      </div>
+      <div class="mt-4">
+       <h3 class="text-lg font-bold">
+        Account Holder
+       </h3>
+       <p>
+        Name:
+        <span id="accountHolderName">
+        </span>
+       </p>
+       <p>
+        Address: 123 Jalan Ampang, Kuala Lumpur, Malaysia
+       </p>
+       <p>
+        Contact: +60 12-345 6789
+       </p>
+      </div>
+      <div class="mt-6 text-center">
+       <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300" onclick="goBack()">
+        Back
+       </button>
+      </div>
+      <div class="mt-6 text-center">
+       <img alt=height="400" src="https://storage.googleapis.com/a1aa/image/m2ydCgo3XvW_FHT4OjU8jBqu47wX_amNaECRog9M5Mw.jpg" width="600"/>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </body>
+</html>
